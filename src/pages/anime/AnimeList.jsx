@@ -1,9 +1,14 @@
 import React from 'react';
+import { Header } from 'components';
+import { MikMainContent } from 'utilities/styledComponent';
 
 const AnimeList = () => {
     return ( 
         <>
-            Halaman index
+            <Header />
+            <MikMainContent>
+                Halaman index
+            </MikMainContent>
         </>
     );
 }

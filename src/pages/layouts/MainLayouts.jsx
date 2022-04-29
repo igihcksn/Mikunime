@@ -4,27 +4,24 @@ import { AnimeDetails, AnimeList } from 'pages/anime';
 import { CollectionDetails, CollectionList } from 'pages/collections';
 import { URL } from 'utilities/constants';
 import NotFound from './NotFound';
+import { Footer } from 'utilities/styledComponent';
 
 const MainLayouts = () => {
     return ( 
         <>
-            <nav>
-                ini nav
-            </nav>
-            <main>
-                <Routes>
-                    <Route index element={<AnimeList />} />
-                    <Route path={URL.ANIME_DETAILS} element={<AnimeDetails />} />
+            <Routes>
+                <Route index element={<AnimeList />} />
+                <Route path={URL.ANIME_DETAILS} element={<AnimeDetails />} />
 
-                    <Route path={URL.COLLECTION_LIST} element={<CollectionList />} />
-                    <Route path={URL.COLLECTION_DETAILS} element={<CollectionDetails />} />
+                <Route path={URL.COLLECTION_LIST} element={<CollectionList />} />
+                <Route path={URL.COLLECTION_DETAILS} element={<CollectionDetails />} />
 
-                    <Route path='*' element={<NotFound />} />
-                </Routes>
-            </main>
-            <footer>
+                <Route path='*' element={<NotFound />} />
+            </Routes>
+
+            <Footer>
                 ini footer
-            </footer>
+            </Footer>
         </>
     );
 }
