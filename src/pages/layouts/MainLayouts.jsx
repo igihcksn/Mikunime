@@ -3,12 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import { AnimeDetails, AnimeList } from 'pages/anime';
 import { CollectionDetails, CollectionList } from 'pages/collections';
 import { URL } from 'utilities/constants';
+import { client } from 'utilities';
 import NotFound from './NotFound';
 import { Footer } from 'utilities/styledComponent';
+import { ApolloProvider } from '@apollo/client';
 
 const MainLayouts = () => {
     return ( 
-        <>
+        <ApolloProvider client={client}>
             <Routes>
                 <Route index element={<AnimeList />} />
                 <Route path={URL.ANIME_DETAILS} element={<AnimeDetails />} />
@@ -22,7 +24,7 @@ const MainLayouts = () => {
             <Footer>
                 ini footer
             </Footer>
-        </>
+        </ApolloProvider>
     );
 }
 
