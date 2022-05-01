@@ -10,9 +10,7 @@ function App() {
       <Global
             styles={css`
                 body {
-                    background: ${BASE_COLOR.SOFT_RED};  /* fallback for old browsers */
-                    background: -webkit-linear-gradient(to right, ${BASE_COLOR.DARK_RED}, ${BASE_COLOR.SOFT_RED});  /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to right, ${BASE_COLOR.DARK_RED}, ${BASE_COLOR.SOFT_RED}); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                    background: ${BASE_COLOR.WHITE};
                 }
             `}
         />

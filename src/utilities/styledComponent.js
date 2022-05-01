@@ -8,9 +8,10 @@ import { BASE_COLOR } from './constants';
 export const MikNavbar = styled.nav`
     color: ${BASE_COLOR.WHITE};
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    font-weight: bold;
 `;
 
 export const MikNavbarTitle = styled(Link)`
@@ -33,19 +34,39 @@ export const MikNavbarList = styled(Link)`
 // Header style
 
 export const MikHeader = styled.header`
-    height: 40vh;
-    text-align: center;
-    padding: 1rem 2rem;
+    padding: 2rem 6rem;
     color: ${BASE_COLOR.WHITE};
-    font-family: 'League Spartan', sans-serif;
+    font-family: 'Gudea', sans-serif;
+    background: ${BASE_COLOR.SOFT_RED};
+
+    @media screen and (max-width: 768px) {
+        padding: 1rem 2rem;
+    }
+`;
+
+export const MikHeaderContent = styled.div`
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const MikHeaderContentTitle = styled.h1`
+    font-size: 30px;
+`;
+
+export const MikHeaderContentDescription = styled.p`
+    line-hight: 1;
 `;
 
 // Main content style
 
 export const MikMainContent = styled.main`
     margin: 0 2rem;
-    padding: 2rem 4rem;
-    color: ${BASE_COLOR.WHITE}
+    padding: 0 2rem 4rem 4rem;
+    font-family: 'Gudea', sans-serif;
 
     @media screen and (max-width: 768px) {
         margin: 0 1.5rem;
@@ -53,7 +74,7 @@ export const MikMainContent = styled.main`
     }
 
     @media screen and (max-width: 428px) {
-        margin: 0 1rem;
+        margin: 0 .5rem;
         padding: 0 1rem;
     }
 `;
@@ -132,11 +153,11 @@ export const MikMainContentCardImgBox = styled.img`
     width: 185px;
     height: 265px;
     border-radius: 5px;
-    box-shadow: 0 14px 30px rgba(var(--color-shadow-blue),.15),0 4px 4px rgba(var(--color-shadow-blue),.05);
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
 
     @media screen and (max-width: 768px) {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
     }
 `;
@@ -153,12 +174,14 @@ export const MikMainContentCardRatingBox = styled.div`
 
     @media screen and (max-width: 428px) {
         padding: .1rem;
+        font-size: 12px;
     }
 `;
 
 export const MikMainContentCardTitle = styled.p`
-    color: ${BASE_COLOR.WHITE};
+    color: ${BASE_COLOR.BLACK};
     text-align: center;
+    font-weight: bold;
 
     @media screen and (max-width: 428px) {
         text-align: left;
@@ -166,11 +189,12 @@ export const MikMainContentCardTitle = styled.p`
     }
 `;
 
-export const MikMainContentCardLoader = styled.p`
-    font-size: 20px;
-    font-weight: bold;
-    color: ${BASE_COLOR.WHITE};
+export const MikMainContentCardLoader = styled.div`
     grid-column: 2 / 6;
+
+    @media screen and (max-width: 428px) {
+        grid-column: 1 / span 3;
+    }
 `;
 
 

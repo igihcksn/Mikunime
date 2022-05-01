@@ -11,7 +11,8 @@ import {
     MikOngoingSection,
 } from 'utilities/styledComponent';
 import { useQuery } from '@apollo/client';
-import { QUERY, URL } from 'utilities/constants';
+import { BASE_COLOR, QUERY, URL } from 'utilities/constants';
+import LoadingSpin from 'react-loading-spin';
 
 const AnimeList = () => {
 
@@ -57,8 +58,7 @@ const AnimeList = () => {
             setAnimeList([...animeList, ...loadMore.data.Page.media])
             setHasMore(loadMore.data.Page.pageInfo.hasNextPage);
             setInitialPage(initialPage + 1);
-        }, 1000);
-
+        }, 2000);
     }
 
     const renderCardItems = () => animeList.map(anime => (
@@ -83,7 +83,15 @@ const AnimeList = () => {
                         dataLength={animeList.length || 12}
                         next={loadMoreData}
                         hasMore={hasMore}
-                        loader={<MikMainContentCardLoader>Loading...</MikMainContentCardLoader>}
+                        loader={
+                            <MikMainContentCardLoader>
+                                <LoadingSpin
+                                    duration="2s"
+                                    size={40}
+                                    primaryColor={BASE_COLOR.SOFT_RED}
+                                />
+                            </MikMainContentCardLoader>
+                        }
                         initialScrollY={600}
                     >
                         { !isLoading && renderCardItems() }

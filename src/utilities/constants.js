@@ -12,7 +12,7 @@ export const URL = {
 };
 
 export const BASE_COLOR = {
-    WHITE: '#FFFFFF',
+    WHITE: '#F7F7F7',
     SOFT_RED: '#ED213A',
     DARK_RED: '#93291E',
     BLACK: '#06113C',
