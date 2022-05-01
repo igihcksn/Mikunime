@@ -29,7 +29,7 @@ export const QUERY = {
                     hasNextPage
                     perPage
                 }
-                media (id: $id, seasonYear: $seasonYear, season: $season, sort: $sort) {
+                media (id: $id, isAdult: false, seasonYear: $seasonYear, season: $season, sort: $sort) {
                     id
                     title {
                         romaji

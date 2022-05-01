@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import { BASE_COLOR } from './constants';
 
@@ -10,6 +11,12 @@ export const MikNavbar = styled.nav`
     justify-content: space-around;
     align-items: center;
     padding: 1rem 0;
+`;
+
+export const MikNavbarTitle = styled(Link)`
+    color: ${BASE_COLOR.WHITE};
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
 `;
 
 export const MikNavbarList = styled(Link)`
@@ -30,6 +37,7 @@ export const MikHeader = styled.header`
     text-align: center;
     padding: 1rem 2rem;
     color: ${BASE_COLOR.WHITE};
+    font-family: 'League Spartan', sans-serif;
 `;
 
 // Main content style
@@ -50,7 +58,7 @@ export const MikMainContent = styled.main`
     }
 `;
 
-export const MikOngoingSection = styled.section`
+export const MikOngoingSection = styled(InfiniteScroll)`
     display: grid;
     grid-template-columns: repeat(6, minmax(0px, 1fr));
     gap: 20px;
@@ -70,10 +78,42 @@ export const MikOngoingSection = styled.section`
 export const MikMainContentCardLink = styled(Link)`
     width: 185px;
     text-decoration: none;
+    -webkit-transition: width 0.4s 0s linear;
+        -moz-transition: width 0.4s 0s linear;
+        -o-transition: width 0.4s 0s linear;
+        transition: width 0.4s 0s linear;
 
     @media screen and (max-width: 768px) {
         width: 100%;
     }
+
+    @-webkit-keyframes fade-in-bottom {
+        0% {
+          -webkit-transform: translateY(50px);
+                  transform: translateY(50px);
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: translateY(0);
+                  transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes fade-in-bottom {
+        0% {
+          -webkit-transform: translateY(50px);
+                  transform: translateY(50px);
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: translateY(0);
+                  transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      -webkit-animation: fade-in-bottom 0.6s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+      animation: fade-in-bottom 0.6s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 `;
 
 export const MikMainContentCardList = styled.div`
@@ -124,6 +164,13 @@ export const MikMainContentCardTitle = styled.p`
         text-align: left;
         font-size: 12px;
     }
+`;
+
+export const MikMainContentCardLoader = styled.p`
+    font-size: 20px;
+    font-weight: bold;
+    color: ${BASE_COLOR.WHITE};
+    grid-column: 2 / 6;
 `;
 
 
