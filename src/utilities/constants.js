@@ -13,7 +13,7 @@ export const URL = {
 
 export const BASE_COLOR = {
     WHITE: '#F7F7F7',
-    SOFT_RED: '#ED213A',
+    SOFT_RED: '#E81536',
     DARK_RED: '#93291E',
     BLACK: '#06113C',
 };
@@ -50,13 +50,69 @@ export const QUERY = {
             }
         }
     `,
-    // GET_RECOMEND_ANIME: gql`
-    //     query ($id: Int) {
-    //         Recommendation (id: $id) {
-    //             id
-    //             rating
-    //             media
-    //         }
-    //     }
-    // `,
+    GET_DETAILS_ANIME: gql`
+        query ($id: Int) {
+            Media (id: $id, type: ANIME) {
+                title {
+                    romaji
+                    english
+                    native
+                    userPreferred
+                }
+                description
+                status
+                seasonYear
+                seasonInt
+                season
+                genres
+                episodes
+                coverImage {
+                    extraLarge
+                    large
+                    medium
+                    color
+                }
+                staff {
+                    edges {
+                    node {
+                        name {
+                        native
+                            userPreferred
+                        }
+                        image {
+                            medium
+                        }
+                        
+                    }
+                    }
+                }
+                characters {
+                    edges {
+                        node {
+                            name {
+                                native
+                                userPreferred
+                            }
+                            gender
+                            age
+                            image {
+                                medium
+                            }
+                        }
+                        voiceActors {
+                            id
+                            name {
+                                native
+                                userPreferred
+                            }
+                            image {
+                                large
+                                medium
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `,
 }
