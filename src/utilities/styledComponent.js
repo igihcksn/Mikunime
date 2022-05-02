@@ -162,6 +162,10 @@ export const MikMainContentCardImgBox = styled.img`
         height: 100%;
         object-fit: cover;
     }
+
+    @media screen and (max-width: 428px) {
+        ${props => props.isDetail && 'max-width: 100px'}
+    }
 `;
 
 export const MikMainContentCardRatingBox = styled.div`
@@ -196,6 +200,84 @@ export const MikMainContentCardLoader = styled.div`
 
     @media screen and (max-width: 428px) {
         grid-column: 1 / span 3;
+    }
+`;
+
+// Details style
+
+export const MikMainDetailHeader = styled.div`
+    background: url(${props => props.src});
+    height: 400px;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+`;
+
+export const MikMainDetailHeaderInnerShadow = styled.div`
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, ${props => props.shadowColor ?? 'rgba(0,0,0,1)'} 125%);
+    width: 100%;
+    height: 100%;
+`;
+
+export const MikMainDetailHeaderBackButton = styled(Link)`
+    position: absolute;
+    top: 1rem;
+    left: 4rem;
+    color: ${BASE_COLOR.WHITE};
+    font-weight: 700;
+    text-decoration: none;
+
+    @media screen and (max-width: 428px) {
+        left: 1rem;
+    }
+`;
+
+export const MikMainDetailBody = styled.div`
+    background: #FFFFFF;
+    padding: 1rem 4rem;
+    display: grid;
+    grid-column-gap: 30px;
+    grid-template-columns: 215px auto;
+
+    @media screen and (max-width: 428px) {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+`;
+
+export const MikMainDetailThumbnail = styled.div`
+    margin-top: -125px;
+    text-align: center;
+    z-index: 1;
+
+    @media screen and (max-width: 428px) {
+        text-align: left;
+        display: grid;
+        grid-template-columns: 100px auto;
+        grid-gap: 10px;
+        align-items: end;
+    }
+`;
+
+export const MikMainDetailDescriptionTitle = styled.h1`
+    font-size: 24px;
+`;
+
+export const MikMainDetailDescriptionBody = styled.div`
+    height: 150px;
+    overflow: auto;
+`;
+
+export const MikMainDetailButtonAddCollection = styled.button`
+    width: 185px;
+
+    @media screen and (max-width: 428px) {
+        width: 100%;
     }
 `;
 

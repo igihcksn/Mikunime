@@ -66,6 +66,7 @@ export const QUERY = {
                 season
                 genres
                 episodes
+                bannerImage
                 coverImage {
                     extraLarge
                     large
