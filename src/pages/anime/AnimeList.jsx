@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Header } from 'components';
 import {
     MikMainContent,
@@ -10,56 +10,18 @@ import {
     MikMainContentCardTitle,
     MikOngoingSection,
 } from 'utilities/styledComponent';
-import { useQuery } from '@apollo/client';
-import { BASE_COLOR, QUERY, URL } from 'utilities/constants';
+import { BASE_COLOR, URL } from 'utilities/constants';
 import LoadingSpin from 'react-loading-spin';
+import { MikContext } from 'utilities/context';
 
 const AnimeList = () => {
 
-    const [animeList, setAnimeList] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [hasMore, setHasMore] = useState(false);
-    const [initialPage, setInitialPage] = useState(1);
-    const [initialVariable] = useState({
-        variables: {
-            page: initialPage,
-            perPage: 12,
-            seasonYear: 2022,
-            season: 'SPRING',
-            sort: ['POPULARITY_DESC'],
-        }
-    });
-
-    const AnimeListData = useQuery(QUERY.GET_LIST_ANIME, initialVariable)
-
-    useEffect(() => {
-        if(AnimeListData.data) {
-            setAnimeList(AnimeListData.data.Page.media);
-            setIsLoading(AnimeListData.loading);
-            setHasMore(AnimeListData.data.Page.pageInfo.hasNextPage);
-            setInitialPage(initialPage + 1);
-        } else if (AnimeListData.error) {
-            setIsLoading(AnimeListData.loading);
-            console.log(AnimeListData.error.networkError.result.errors)
-        }
-    }, [AnimeListData]);
-
-    const loadMoreData = () => {
-        setTimeout(async() => {
-            const loadMore = await AnimeListData.fetchMore({
-                variables: {
-                    page: initialPage,
-                    perPage: 12,
-                    seasonYear: 2022,
-                    season: 'SPRING',
-                    sort: ['POPULARITY_DESC'],
-                }
-            })
-            setAnimeList([...animeList, ...loadMore.data.Page.media])
-            setHasMore(loadMore.data.Page.pageInfo.hasNextPage);
-            setInitialPage(initialPage + 1);
-        }, 2000);
-    }
+    const {
+        animeList,
+        isLoading,
+        hasMore,
+        loadMoreData,
+    } = useContext(MikContext);
 
     const renderCardItems = () => animeList.map(anime => (
         <MikMainContentCardLink to={URL.ANIME_DETAILS.replace(':slug', anime.id)} key={anime.id}>
