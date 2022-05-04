@@ -33,7 +33,7 @@ const Header = ({
                 <Input
                     pr='4.5rem'
                     type='text'
-                    placeholder='Enter password'
+                    placeholder='Enter name'
                 />
                 <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleSearchAnime}>

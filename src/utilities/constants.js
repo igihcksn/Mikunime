@@ -114,6 +114,26 @@ export const QUERY = {
                         }
                     }
                 }
+                relations {
+                    edges {
+                        node {
+                            id
+                            title {
+                                romaji
+                                english
+                                native
+                                userPreferred
+                            }
+                            coverImage {
+                                extraLarge
+                                large
+                                medium
+                                color
+                            }
+                            averageScore
+                        }
+                    }
+                }
             }
         }
     `,

@@ -96,7 +96,7 @@ export const MikMainContent = styled.main`
     margin: 0 2rem;
     padding: 2rem 2rem 4rem 4rem;
     font-family: 'Gudea', sans-serif;
-    min-height: 300px;
+    min-height: 500px;
 
     @media screen and (max-width: 768px) {
         margin: 0 1.5rem;
@@ -279,6 +279,29 @@ export const MikMainDetailBox = styled.div`
     }
 `;
 
+export const MikMainDetailInformationBox = styled.div`
+    background: ${BASE_COLOR.WHITE};
+    min-height: 300px;
+    padding: 1rem 4rem;
+
+    @media screen and (max-width: 428px) {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+`;
+
+export const MikTableDataCharacter = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 20px;
+    align-items: center;
+
+    @media screen and (max-width: 428px) {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+`;
+
 export const MikMainDetailThumbnail = styled.div`
     margin-top: -125px;
     text-align: center;
@@ -379,10 +402,14 @@ export const MikMainContentCollectionTitle = styled.div`
 // Footer style
 
 export const MikFooterContainer = styled.footer`
-    width: 100%;
     color: ${BASE_COLOR.WHITE};
     text-align: center;
     background: ${BASE_COLOR.BLACK};
+`;
+
+export const MikFooterDetails = styled.footer`
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
 `;
     
 export const MikFooterMobileNav = styled.nav`

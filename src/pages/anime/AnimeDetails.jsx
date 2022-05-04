@@ -10,14 +10,17 @@ import {
     MikMainDetailHeader,
     MikMainDetailHeaderBackButton,
     MikMainDetailHeaderInnerShadow,
-    MikMainDetailThumbnail
+    MikMainDetailInformationBox,
+    MikMainDetailThumbnail,
+    MikOngoingSection,
+    MikTableDataCharacter
 } from 'utilities/styledComponent';
 import { QUERY } from 'utilities/constants';
 import parse from 'html-react-parser';
 import { ChevronLeftIcon, PlusSquareIcon } from '@chakra-ui/icons';
-import { Button, FormControl, FormLabel, Select, useToast } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Select, Tab, Table, TableContainer, TabList, TabPanel, TabPanels, Tabs, Tbody, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import { MikContext } from 'utilities/context';
-import { MikModalCustom } from 'components';
+import { CardItems, MikModalCustom } from 'components';
 
 const AnimeDetails = () => {
 
@@ -58,24 +61,67 @@ const AnimeDetails = () => {
                             <MikMainDetailHeaderBackButton to='/'><ChevronLeftIcon /> Back to Home</MikMainDetailHeaderBackButton>
                             <MikMainDetailHeaderInnerShadow shadowColor={animeDetails.coverImage.color} />
                         </MikMainDetailHeader>
-                        {/* <MikMainContent isDetail> */}
-                            <MikMainDetailBox>
-                                <MikMainDetailThumbnail>
-                                    <MikMainContentCardImgBox isDetail src={animeDetails.coverImage.extraLarge} alt="test" />
-                                    <MikMainDetailButtonAddCollection leftIcon={<PlusSquareIcon />} variant='solid' onClick={modalDisclosure.onOpen}>
-                                        Add to collection
-                                    </MikMainDetailButtonAddCollection>
-                                </MikMainDetailThumbnail>
-                                <div>
-                                    <MikMainDetailDescriptionTitle as='h1' size='md'>{animeDetails.title.userPreferred}</MikMainDetailDescriptionTitle>
-                                    <MikMainDetailDescriptionBody>{parse(animeDetails.description)}</MikMainDetailDescriptionBody>
-                                    {/* <MikNavbarList to='/collection'>Manga</MikNavbarList>
-                                    <MikNavbarList to='/collection'>Character</MikNavbarList>
-                                    <MikNavbarList to='/collection'>Studio</MikNavbarList>
-                                    <MikNavbarList to='/collection'>Collection</MikNavbarList> */}
-                                </div>
-                            </MikMainDetailBox>
-                        {/* </MikMainContent> */}
+                        <MikMainDetailBox>
+                            <MikMainDetailThumbnail>
+                                <MikMainContentCardImgBox isDetail src={animeDetails.coverImage.extraLarge} alt="test" />
+                                <MikMainDetailButtonAddCollection leftIcon={<PlusSquareIcon />} variant='solid' onClick={modalDisclosure.onOpen}>
+                                    Add to collection
+                                </MikMainDetailButtonAddCollection>
+                            </MikMainDetailThumbnail>
+                            <div>
+                                <MikMainDetailDescriptionTitle as='h1' size='md'>{animeDetails.title.userPreferred}</MikMainDetailDescriptionTitle>
+                                <MikMainDetailDescriptionBody>{parse(animeDetails.description)}</MikMainDetailDescriptionBody>
+                            </div>
+                        </MikMainDetailBox>
+
+                        <MikMainDetailInformationBox>
+                            <Tabs isLazy>
+                                <TabList>
+                                    <Tab>Character</Tab>
+                                    <Tab>Recomendation</Tab>
+                                </TabList>
+                                <TabPanels>
+                                    <TabPanel>
+                                        <TableContainer>
+                                            <Table variant='striped' size='sm'>
+                                                <Thead>
+                                                    <Tr>
+                                                        <Th>Character</Th>
+                                                        <Th>Voice Actors</Th>
+                                                    </Tr>
+                                                </Thead>
+                                                <Tbody>
+                                                    {
+                                                        animeDetails.characters.edges.map((character, index) => (
+                                                            <Tr key={index}>
+                                                                <Td>
+                                                                    <MikTableDataCharacter>
+                                                                        <img src={character.node.image.medium} alt={character.node.name.userPreferred} />
+                                                                        <p>{`${character.node.name.userPreferred} (${character.node.name.native})`}</p>
+                                                                    </MikTableDataCharacter>
+                                                                </Td>
+                                                                <Td>
+                                                                    <MikTableDataCharacter>
+                                                                        <img src={character.voiceActors[0] && character.voiceActors[0].image.medium} alt={character.voiceActors[0] && character.voiceActors[0].name.userPreferred} />
+                                                                        <p>{`${character.voiceActors[0] &&  character.voiceActors[0].name.userPreferred} (${character.voiceActors[0] && character.voiceActors[0].name.native})`}</p>
+                                                                    </MikTableDataCharacter>
+                                                                </Td>
+                                                            </Tr>
+                                                        ))
+                                                    }
+                                                </Tbody>
+                                            </Table>
+                                        </TableContainer>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <MikOngoingSection
+                                            dataLength={animeDetails.relations.edges.length || 0}>
+                                            { animeDetails.relations.edges.length > 0 && CardItems({ animeList: animeDetails.relations.edges, isEdged: true }) }
+                                        </MikOngoingSection>
+                                    </TabPanel>
+                                </TabPanels>
+                            </Tabs>
+                        </MikMainDetailInformationBox>
 
                         <MikModalCustom 
                             initialFocusRef={initialRef}
