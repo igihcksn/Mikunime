@@ -408,8 +408,8 @@ export const MikFooterContainer = styled.footer`
 `;
 
 export const MikFooterDetails = styled.footer`
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0px, 1fr));
+    display: flex;
+    justify-content: center;
 `;
     
 export const MikFooterMobileNav = styled.nav`

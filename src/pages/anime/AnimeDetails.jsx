@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
     MikMainContentCardImgBox,
     MikMainDetailBox,
@@ -18,7 +18,7 @@ import {
 import { QUERY } from 'utilities/constants';
 import parse from 'html-react-parser';
 import { ChevronLeftIcon, PlusSquareIcon } from '@chakra-ui/icons';
-import { Button, FormControl, FormLabel, Select, Tab, Table, TableContainer, TabList, TabPanel, TabPanels, Tabs, Tbody, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Select, Tab, Table, TableContainer, TabList, TabPanel, TabPanels, Tabs, Tbody, Td, Text, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import { MikContext } from 'utilities/context';
 import { CardItems, MikModalCustom } from 'components';
 
@@ -136,11 +136,14 @@ const AnimeDetails = () => {
                                         onChange={handleSelectedCollection}
                                         placeholder='Select collection'>
                                         {
-                                            collectionList.map((collection, index) => (
+                                            collectionList && collectionList.map((collection, index) => (
                                                 <option ref={initialRef} key={index} value={collection.name}>{collection.name}</option>
                                             ))
                                         }
                                     </Select>
+                                    {
+                                        !collectionList && <Text fontSize='sm'>Collection not found please add collection with this <span style={{ color: 'blue' }}><Link to='/collection'>link</Link></span></Text>
+                                    }
                                 </FormControl>
                             )}
                             modalFooter={(
