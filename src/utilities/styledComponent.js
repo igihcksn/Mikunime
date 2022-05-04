@@ -1,3 +1,4 @@
+import { Button, Heading, MenuButton, MenuList } from '@chakra-ui/react';
 import styled from '@emotion/styled'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,24 @@ export const MikNavbarTitle = styled(Link)`
     color: ${BASE_COLOR.WHITE};
     font-family: 'Bangers', cursive;
     font-size: 2rem;
+`;
+
+export const MikNavbarMenuButton = styled(MenuButton)`
+    color: ${BASE_COLOR.WHITE};
+    display: none;
+    font-weight: bold;
+
+    &[data-active] : {
+        color: ${BASE_COLOR.BLACK};
+    }
+
+    @media screen and (max-width: 768px) {
+        display: inline;
+    }
+`;
+
+export const MikNavbarMenuList = styled(MenuList)`
+    color: ${BASE_COLOR.BLACK};
 `;
 
 export const MikNavbarList = styled(Link)`
@@ -44,15 +63,23 @@ export const MikHeader = styled.header`
     @media screen and (max-width: 768px) {
         padding: 1rem 2rem;
     }
+
+    @media screen and (max-width: 428px) {
+        padding: 1rem 1.5rem;
+    }
 `;
 
 export const MikHeaderContent = styled.div`
     width: 100%;
-    height: 50vh;
+    height: ${props => props.isCollection ? '30vh' : '50vh'};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+        height: auto;
+    }
 `;
 
 export const MikHeaderContentTitle = styled.h1`
@@ -67,17 +94,18 @@ export const MikHeaderContentDescription = styled.p`
 
 export const MikMainContent = styled.main`
     margin: 0 2rem;
-    padding: 0 2rem 4rem 4rem;
+    padding: 2rem 2rem 4rem 4rem;
     font-family: 'Gudea', sans-serif;
+    min-height: 300px;
 
     @media screen and (max-width: 768px) {
         margin: 0 1.5rem;
-        padding: 0 3rem;
+        padding: 1rem 3rem;
     }
 
     @media screen and (max-width: 428px) {
         margin: 0 .5rem;
-        padding: 0 1rem;
+        padding: 1rem 1rem 4rem 1rem;
     }
 `;
 
@@ -102,9 +130,9 @@ export const MikMainContentCardLink = styled(Link)`
     width: 185px;
     text-decoration: none;
     -webkit-transition: width 0.4s 0s linear;
-        -moz-transition: width 0.4s 0s linear;
-        -o-transition: width 0.4s 0s linear;
-        transition: width 0.4s 0s linear;
+    -moz-transition: width 0.4s 0s linear;
+    -o-transition: width 0.4s 0s linear;
+    transition: width 0.4s 0s linear;
 
     @media screen and (max-width: 768px) {
         width: 100%;
@@ -170,7 +198,7 @@ export const MikMainContentCardImgBox = styled.img`
 
 export const MikMainContentCardRatingBox = styled.div`
     position: absolute;
-    bottom: .2rem;
+    bottom: 0rem;
     right: 0;
     color: ${BASE_COLOR.BLACK};
     text-decoration: none;
@@ -209,6 +237,7 @@ export const MikMainDetailHeader = styled.div`
     background: url(${props => props.src});
     height: 400px;
     position: relative;
+    background-size: cover;
 
     @media screen and (max-width: 768px) {
         height: 200px;
@@ -237,7 +266,7 @@ export const MikMainDetailHeaderBackButton = styled(Link)`
     }
 `;
 
-export const MikMainDetailBody = styled.div`
+export const MikMainDetailBox = styled.div`
     background: #FFFFFF;
     padding: 1rem 4rem;
     display: grid;
@@ -254,6 +283,7 @@ export const MikMainDetailThumbnail = styled.div`
     margin-top: -125px;
     text-align: center;
     z-index: 1;
+    justify-self: center;
 
     @media screen and (max-width: 428px) {
         text-align: left;
@@ -261,34 +291,119 @@ export const MikMainDetailThumbnail = styled.div`
         grid-template-columns: 100px auto;
         grid-gap: 10px;
         align-items: end;
+        padding: 1rem 0;
     }
 `;
 
-export const MikMainDetailDescriptionTitle = styled.h1`
+export const MikMainDetailDescriptionTitle = styled(Heading)`
     font-size: 24px;
+
+    @media screen and (max-width: 428px) {
+        font-size: 14px;
+    }
 `;
 
 export const MikMainDetailDescriptionBody = styled.div`
     height: 150px;
     overflow: auto;
+
+    @media screen and (max-width: 428px) {
+        font-size: 12px;
+    }
 `;
 
-export const MikMainDetailButtonAddCollection = styled.button`
+export const MikMainDetailButtonAddCollection = styled(Button)`
     width: 185px;
+    color: ${BASE_COLOR.WHITE};
+    background: ${BASE_COLOR.BLACK};
+    margin: 1rem 0;
 
     @media screen and (max-width: 428px) {
         width: 100%;
+        margin: 0;
     }
+`;
+
+// Collection style
+
+export const MikMainCollection = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0px, 1fr));
+    gap: 20px;
+    justify-items: center;
+
+    @media screen and (max-width: 428px) {
+        grid-template-columns: repeat(2, minmax(0px, 1fr));
+    }
+`;
+
+export const MikMainCollectionBox = styled.div`
+    border: 2px solid ${BASE_COLOR.BLACK};
+    border-radius: 5px;
+    width: 100%;
+    padding: 1rem 0;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+    @media screen and (max-width: 428px) {
+        flex-direction: column;
+    }
+`;
+
+export const MikMainCollectionRemoveButton = styled.button`
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    background: ${BASE_COLOR.WHITE};
+`;
+
+export const MikMainContentButtonAddCollection = styled.button`
+    border-radius: 5px;
+    padding: .5rem;
+    color: ${BASE_COLOR.WHITE};
+    background: ${BASE_COLOR.BLACK};
+    border: none;
+    height: 100%;
+`;
+
+export const MikMainContentCollectionTitle = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
 `;
 
 
 // Footer style
 
-export const Footer = styled.footer`
+export const MikFooterContainer = styled.footer`
     width: 100%;
     color: ${BASE_COLOR.WHITE};
     text-align: center;
     background: ${BASE_COLOR.BLACK};
-    position: fixed;
-    bottom: 0;
+`;
+    
+export const MikFooterMobileNav = styled.nav`
+    width: 100%;
+    color: ${BASE_COLOR.WHITE};
+    text-align: center;
+    background: ${BASE_COLOR.BLACK};
+    display: none;
+    padding: 1rem;
+
+    @media screen and (max-width: 428px) {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0px, 1fr));
+        align-items: end;
+        position: fixed;
+        bottom: 0;
+    }
+`;
+
+export const MikFooterMobileNavItems = styled(Link)`
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
 `;
