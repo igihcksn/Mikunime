@@ -63,7 +63,7 @@ const AnimeDetails = () => {
                         </MikMainDetailHeader>
                         <MikMainDetailBox>
                             <MikMainDetailThumbnail>
-                                <MikMainContentCardImgBox isDetail src={animeDetails.coverImage.extraLarge} alt="test" />
+                                <MikMainContentCardImgBox isDetail src={animeDetails.coverImage.extraLarge} alt={animeDetails.title.userPreferred} />
                                 <MikMainDetailButtonAddCollection leftIcon={<PlusSquareIcon />} variant='solid' onClick={modalDisclosure.onOpen}>
                                     Add to collection
                                 </MikMainDetailButtonAddCollection>

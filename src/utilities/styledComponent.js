@@ -407,9 +407,13 @@ export const MikFooterContainer = styled.footer`
     background: ${BASE_COLOR.BLACK};
 `;
 
-export const MikFooterDetails = styled.footer`
+export const MikFooterDetails = styled.div`
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 428px) {
+        display: none;
+    }
 `;
     
 export const MikFooterMobileNav = styled.nav`
@@ -433,4 +437,13 @@ export const MikFooterMobileNavItems = styled(Link)`
     display: flex;
     flex-direction: column;
     font-size: 14px;
+`;
+
+// Falback spiner
+export const MikFallbackSpinner = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

@@ -13,6 +13,7 @@ import {
 } from 'utilities/styledComponent';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import CustomBreadCrumb from './Breadcrumb';
+import { BASE_COLOR } from 'utilities/constants';
 
 const Header = ({
     isFrom = 'homepage',
@@ -36,7 +37,7 @@ const Header = ({
                     placeholder='Enter name'
                 />
                 <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' onClick={handleSearchAnime}>
+                    <Button h='1.75rem' size='sm' onClick={handleSearchAnime} color={BASE_COLOR.BLACK}>
                         Cari
                     </Button>
                 </InputRightElement>
