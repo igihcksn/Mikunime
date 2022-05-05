@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Header } from 'components';
-import { MikMainCollection, MikMainCollectionBox, MikMainCollectionRemoveButton, MikMainContent, MikMainContentButtonAddCollection, MikMainContentCollectionTitle } from 'utilities/styledComponent';
+import React, { useContext, useEffect, useState } from 'react';
+import { Header, MikModalCustom } from 'components';
+import {
+    MikMainCollection,
+    MikMainCollectionBox,
+    MikMainCollectionRemoveButton,
+    MikMainContent,
+    MikMainContentButtonAddCollection,
+    MikMainContentCollectionTitle
+} from 'utilities/styledComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faFolder, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
     FormControl,
-    useDisclosure,
     FormLabel,
     Input,
     Button,
@@ -20,17 +19,19 @@ import {
   } from '@chakra-ui/react'
 import { BASE_COLOR, URL } from 'utilities/constants';
 import { Link } from 'react-router-dom';
+import { MikContext } from 'utilities/context';
 
 const CollectionList = () => {
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        finalRef,
+        initialRef,
+        modalDisclosure,
+    } = useContext(MikContext);
     const [ collectionList, setCollectionList ] = useState([]);
     const [ isError, setIsError ] = useState(false);
     const getCollections = localStorage.getItem('collections');
     const parseData = getCollections && JSON.parse(getCollections);
-
-    const initialRef = useRef();
-    const finalRef = useRef();
 
     const handleSaveCollection = () => {
         const collectionName = initialRef.current.value;
@@ -47,7 +48,7 @@ const CollectionList = () => {
 
             setIsError(false)
             setCollectionList(constructData);
-            onClose();
+            modalDisclosure.onClose();
             return localStorage.setItem('collections', JSON.stringify(constructData));
         } else {
             return setIsError(true)
@@ -78,7 +79,7 @@ const CollectionList = () => {
             <MikMainContent>
                 <MikMainContentCollectionTitle>
                     <h3>Collection List: </h3>
-                    <MikMainContentButtonAddCollection onClick={onOpen}>
+                    <MikMainContentButtonAddCollection onClick={modalDisclosure.onOpen}>
                         <FontAwesomeIcon icon={faSquarePlus} size="lg" /> Add Collection
                     </MikMainContentButtonAddCollection>
                 </MikMainContentCollectionTitle>
@@ -104,34 +105,27 @@ const CollectionList = () => {
                 </MikMainCollection>
             </MikMainContent>
 
-            <Modal
+            <MikModalCustom 
                 initialFocusRef={initialRef}
                 finalFocusRef={finalRef}
-                isOpen={isOpen}
-                onClose={onClose}
-            >
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Create your own collection</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                        <FormControl isInvalid={isError}>
-                            <FormLabel>Collection name</FormLabel>
-                            <Input ref={initialRef} placeholder='Anim paling seru' />
-                            {
-                                isError && <FormErrorMessage>Collection already exist.</FormErrorMessage>
-                            }
-                        </FormControl>
-                    </ModalBody>
-
-                    <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={handleSaveCollection}>
-                        Save
-                        </Button>
-                        <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+                isOpen={modalDisclosure.isOpen}
+                onClose={modalDisclosure.onClose}
+                modalBody={(
+                    <FormControl isInvalid={isError}>
+                        <FormLabel>Collection name</FormLabel>
+                        <Input ref={initialRef} placeholder='Anim paling seru' />
+                        {
+                            isError && <FormErrorMessage>Collection already exist.</FormErrorMessage>
+                        }
+                    </FormControl>
+                )}
+                modalFooter={(
+                    <>
+                        <Button colorScheme='blue' mr={3} onClick={handleSaveCollection}>Save</Button>
+                        <Button onClick={modalDisclosure.onClose}>Cancel</Button>
+                    </>
+                )}
+            />
         </>
     );
 }
